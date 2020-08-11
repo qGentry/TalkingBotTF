@@ -18,8 +18,7 @@ class ModelWrapper:
                 batch_size=self.wrapper_params['batch_size'],
             )
             self.trainer = Trainer(self.model,
-                                   self.wrapper_params["batch_size"],
-                                   self.wrapper_params['clip_norm']
+                                   self.wrapper_params['clip_norm'],
                                    )
 
     def __call__(self, context):

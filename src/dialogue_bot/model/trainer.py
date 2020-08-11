@@ -21,11 +21,11 @@ def calc_loss(
 
 class Trainer:
 
-    def __init__(self, model, batch_size, clip_norm):
+    def __init__(self, model, clip_norm):
         self.model = model
         self.optimizer = tf.keras.optimizers.Adam()
         self.train_steps_count = tf.Variable(0)
-        self.train_step = self.get_train_step(model, batch_size, self. optimizer, clip_norm)
+        self.train_step = self.get_train_step(model, self.optimizer, clip_norm)
         checkpoint = tf.train.Checkpoint(
             train_steps_count=self.train_steps_count,
             optimizer=self.optimizer,
