@@ -19,3 +19,28 @@ class Decoder(tf.keras.layers.Layer):
             self.sampler,
             self.output_projector,
         )
+        self.beam_width = 3
+        self.max_iter = 250
+
+    def embedding_fn(self, inputs):
+        embeddings, _ = self.embedding_layer(inputs)
+        return embeddings
+
+    def inference_decoder(self, initial_state):
+        inference_decoder = tfa.seq2seq.BeamSearchDecoder(
+            embedding_fn=self.embedding_fn,
+            cell=self.decoder_rnncell,
+            maximum_iterations=self.max_iter,
+            output_layer=self.output_projector,
+            beam_width=self.beam_width,
+        )
+        batch_size = tf.shape(initial_state)[0]
+        start_tokens = tf.fill([batch_size], 2)
+        decoder_outputs, _, _ = inference_decoder(
+            None,
+            start_tokens=start_tokens,
+            end_token=1,
+            training=False,
+            initial_state=tfa.seq2seq.tile_batch(initial_state, self.beam_width)
+        )
+        return decoder_outputs

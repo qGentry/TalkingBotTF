@@ -1,1 +1,1 @@
-from .model import Model
+from .dialogue_model import DialogueModel

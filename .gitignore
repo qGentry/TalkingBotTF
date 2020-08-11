@@ -130,3 +130,5 @@ dmypy.json
 notebooks/.ipynb_checkpoints/
 *.pkl
 .idea/
+notebooks/
+model/
