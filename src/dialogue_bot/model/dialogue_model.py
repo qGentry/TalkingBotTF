@@ -29,11 +29,10 @@ class DialogueModel(tf.Module):
         if mode == 'train':
             target_indices = self.preprocessor.process(inputs['target'])
             decoder_input = target_indices[:, :-1]
-            print(decoder_input)
             expected_decoder_output = target_indices[:, 1:]
             decoder_emb_inp, decoder_emb_inp_mask = self.decoder.embedding_layer(decoder_input)
             outputs, _, _ = self.decoder.decoder(decoder_emb_inp,
-                                                 initial_state=context_projected,
+                                                 initial_state=[context_projected],
                                                  )
             return outputs, expected_decoder_output
         else:

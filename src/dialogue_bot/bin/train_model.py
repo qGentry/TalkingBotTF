@@ -7,22 +7,22 @@ config = {
         'context_size': 2,
         'embedding_params': {
             'vocab_size': 87,
-            'embedding_size': 50,
+            'embedding_size': 128,
         },
         'encoder_params': {
-            'hidden_size': 100,
+            'hidden_size': 200,
             'context_size': 2
         },
         'decoder_params': {
-            'embedding_size': 64,
+            'embedding_size': 128,
             'vocab_size': 87,
-            'hidden_size': 77,
+            'hidden_size': 300,
             'output_vocab_size': 87,
         }
     },
     'wrapper_params': {
         'train': True,
-        'batch_size': 100,
+        'batch_size': 200,
         'clip_norm': 2,
         'data_path': 'data/TlkPersonaChatRus/dialogues.tsv',
     }
