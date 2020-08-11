@@ -9,7 +9,7 @@ class ModelWrapper:
 
     def __init__(self, params):
         self.model = DialogueModel(params['model_params'])
-        self.byte_decoder = np.vectorize(lambda x: x.decode())
+        self.byte_decoder = np.vectorize(lambda x: x.decode().strip('T'))
         self.wrapper_params = params['wrapper_params']
         if self.wrapper_params['train']:
             self.dataset = get_dataset(

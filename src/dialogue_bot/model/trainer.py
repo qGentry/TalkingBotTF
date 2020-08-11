@@ -59,14 +59,13 @@ class Trainer:
 
     def get_train_step(self,
                        model: DialogueModel,
-                       batch_size: int,
                        optimizer: tf.keras.optimizers.Optimizer,
                        clip_norm: int = 2,
                        ):
         input_signature = [
             {
-                'context': tf.TensorSpec(shape=(batch_size, None), dtype=tf.string),
-                'target': tf.TensorSpec(shape=[batch_size], dtype=tf.string),
+                'context': tf.TensorSpec(shape=(None, None), dtype=tf.string),
+                'target': tf.TensorSpec(shape=[None], dtype=tf.string),
             }
         ]
 
