@@ -27,7 +27,7 @@ class ModelWrapper:
         return self.byte_decoder(model_ans)
 
     def train_model(self, num_epochs):
-        self.trainer.train(num_epochs, self.dataset)
+        self.trainer.train(num_epochs, self.dataset.shuffle(10000))
 
     def restore_model(self, model_dir='model'):
         latest_checkpoint = tf.train.latest_checkpoint(

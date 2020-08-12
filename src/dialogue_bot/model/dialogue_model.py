@@ -20,8 +20,8 @@ class DialogueModel(tf.Module):
 
     def call(self, inputs, mode):
         context = inputs['context']
-
-        context_indices = self.preprocessor.process(context)
+        with tf.device("/cpu:0"):
+            context_indices = self.preprocessor.process(context)
         context_embeddings, context_mask = self.embeddings_layer(context_indices)
         context_encoded = self.context_encoder(context_embeddings, context_mask)
         context_encoded = tf.concat(context_encoded, axis=-1)
